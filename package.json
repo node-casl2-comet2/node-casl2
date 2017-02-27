@@ -1,0 +1,19 @@
+{
+    "scripts": {
+        "compile": "node ./node_modules/typescript/bin/tsc -p .",
+        "watch": "node ./node_modules/typescript/bin/tsc -w -p .",
+        "run": "npm run compile && node ./out/src/app.js",
+        "test": "npm run compile && node ./node_modules/mocha/bin/mocha --ui tdd ./out/test/**/*.js",
+        "coverage": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report none -- --ui tdd ./out/test/**/*.js"
+    },
+    "dependencies": {
+        "@maxfield/node-casl2-core": "^0.0.3"
+    },
+    "devDependencies": {
+        "typescript": "^2.0.3",
+        "mocha": "^2.3.3",
+        "istanbul": "^0.4.5",
+        "@types/node": "^6.0.40",
+        "@types/mocha": "^2.2.32"
+    }
+}

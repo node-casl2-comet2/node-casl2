@@ -1,0 +1,19 @@
+{
+	"compilerOptions": {
+		"module": "commonjs",
+		"target": "es6",
+		"outDir": "out",
+		"moduleResolution": "node",
+		"inlineSourceMap": true,
+		"noImplicitAny": true,
+		"strictNullChecks": true,
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		"forceConsistentCasingInFileNames": true,
+		"removeComments": false,
+		"preserveConstEnums": true
+	},
+	"exclude": [
+		"node_modules"
+	]
+}

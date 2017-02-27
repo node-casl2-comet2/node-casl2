@@ -1,0 +1,33 @@
+{
+	"version": "0.1.0",
+	"command": "npm",
+	"isShellCommand": true,
+	"suppressTaskName": true,
+	"showOutput": "always",
+	"tasks": [
+		{
+			"taskName": "compile",
+			"args": [
+				"run",
+				"compile"
+			]
+		},
+		{
+			"taskName": "watch",
+			"isWatching": true,
+			"args": [
+				"run",
+				"watch"
+			],
+			"problemMatcher": "$tsc-watch"
+		},
+		{
+			"taskName": "run",
+			"isBuildCommand": true,
+			"args": [
+				"run",
+				"run"
+			]
+		}
+	]
+}
