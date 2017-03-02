@@ -11,7 +11,32 @@
             "preLaunchTask": "compile", // デバッグ前にTypeScriptをコンパイルする
             "program": "${workspaceRoot}/out/src/app.js",
             "cwd": "${workspaceRoot}",
-            "outFiles": [ "${workspaceRoot}/out/**/*.js" ],
+            "outFiles": [
+                "${workspaceRoot}/out/**/*.js"
+            ],
+            "sourceMaps": true
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Run mocha test",
+            "preLaunchTask": "compile", // デバッグ前にTypeScriptをコンパイルする            
+            "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
+            "stopOnEntry": false,
+            "args": [
+                "--ui",
+                "tdd",
+                "./dist/test/**/*.js",
+                "--no-timeouts"
+            ],
+            "cwd": "${workspaceRoot}",
+            "runtimeExecutable": null,
+            "env": {
+                "NODE_ENV": "testing"
+            },
+            "outFiles": [
+                "${workspaceRoot}/dist/**/*.js"
+            ],
             "sourceMaps": true
         }
     ]
