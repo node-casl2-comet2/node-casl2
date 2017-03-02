@@ -1,4 +1,10 @@
 {
+    "name": "@maxfield/node-casl2",
+    "version": "0.0.1",
+    "description": "",
+    "main": "dist/src/app.js",
+    "author": "Maxfield Walker",
+    "license": "MIT",
     "scripts": {
         "compile": "node ./node_modules/typescript/bin/tsc -p .",
         "watch": "node ./node_modules/typescript/bin/tsc -w -p .",
