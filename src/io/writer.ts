@@ -25,15 +25,12 @@ export class Writer {
             const n = numbers[i];
             // 16進数での桁数を調べる
             const digit = n.toString(16).length;
-            if (digit == 8) {
-                // 第3引数にfalseを指定するとビッグエンディアンになる
-                view.setUint32(byteOffset, n, false);
-                byteOffset += 4;
-            } else if (digit <= 4) {
-                view.setUint16(byteOffset, n, false);
-                byteOffset += 2;
+            if (!(digit >= 0 && digit <= 4)) {
+                throw new Error("Unexpected binary hex: " + n.toString(16));
             }
-            else throw new Error("invalid hex code length.");
+
+            view.setUint16(byteOffset, n, false);
+            byteOffset += 2;
         }
 
         return new Buffer(arrayBuffer);

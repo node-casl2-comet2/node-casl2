@@ -7,7 +7,7 @@
         "coverage": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report none -- --ui tdd ./out/test/**/*.js"
     },
     "dependencies": {
-        "@maxfield/node-casl2-core": "^0.0.3"
+        "@maxfield/node-casl2-core": "^1.0.0"
     },
     "devDependencies": {
         "typescript": "^2.0.3",
