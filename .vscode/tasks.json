@@ -28,6 +28,13 @@
 				"run",
 				"run"
 			]
+		},
+		{
+			"taskName": "test",
+			"isTestCommand": true,
+			"args": [
+				"test"
+			]
 		}
 	]
 }
