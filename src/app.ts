@@ -21,6 +21,11 @@ function execute(args: Array<string>) {
         return sys.exit(ExitStatus.Fail);
     }
 
+    if (options.help) {
+        printHelp();
+        return sys.exit(ExitStatus.Success);
+    }
+
     if (options.version) {
         printVersion();
         return sys.exit(ExitStatus.Success);

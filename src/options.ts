@@ -17,6 +17,12 @@ export const commandLineOptions: Array<CommandLineOption> = [
         shortName: "v",
         type: "boolean",
         description: "バージョンを表示します。"
+    },
+    {
+        name: "help",
+        shortName: "h",
+        type: "boolean",
+        description: "ヘルプを表示します。"
     }
 ];
 
@@ -33,6 +39,7 @@ export interface CommandLineOptions {
     useGR8?: boolean;
     enableLabelScope?: boolean;
     version?: boolean;
+    help?: boolean;
 
     [option: string]: boolean | undefined;
 }

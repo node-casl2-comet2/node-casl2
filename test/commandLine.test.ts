@@ -28,4 +28,16 @@ suite("parse command line test", () => {
         const result = parseCommandLine(cl);
         assert(result.options.version);
     });
+
+    test("help option", () => {
+        const cl = ["--help"];
+        const result = parseCommandLine(cl);
+        assert(result.options.help);
+    });
+
+    test("short help option", () => {
+        const cl = ["-h"];
+        const result = parseCommandLine(cl);
+        assert(result.options.help);
+    });
 });
