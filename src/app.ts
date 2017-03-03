@@ -7,8 +7,10 @@ import { Writer } from "./io/writer";
 import { Casl2, Casl2CompileOption } from "@maxfield/node-casl2-core";
 import { commandLineOptions } from "./options";
 import { getVersion } from "./util/version";
+import { pathToFileName } from "./util/path";
 import { sys, ExitStatus } from "./sys";
 import { parseCommandLine } from "./commandLine";
+import { isValidInputSource } from "./validation";
 import * as _ from "lodash";
 
 function execute(args: Array<string>) {
@@ -37,11 +39,17 @@ function execute(args: Array<string>) {
         printHelp();
     }
 
+    const casSourcePath = fileNames[0];
+    if (!isValidInputSource(casSourcePath)) {
+        sys.stderr.writeLine("入力ソースの拡張子は '.cas' である必要があります。");
+        return sys.exit(ExitStatus.Fail);
+    }
+
     const compileOption: Casl2CompileOption = {
         useGR8: options.useGR8
     };
 
-    compile(fileNames[0], compileOption, options.out);
+    compile(casSourcePath, compileOption, options.out);
 }
 
 function compile(casSourcePath: string, compileOption: Casl2CompileOption, outputPath?: string) {
