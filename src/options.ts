@@ -23,6 +23,12 @@ export const commandLineOptions: Array<CommandLineOption> = [
         shortName: "h",
         type: "boolean",
         description: "ヘルプを表示します。"
+    },
+    {
+        name: "out",
+        shortName: "o",
+        type: "string",
+        description: "出力ファイル名を指定します。"
     }
 ];
 
@@ -40,6 +46,7 @@ export interface CommandLineOptions {
     enableLabelScope?: boolean;
     version?: boolean;
     help?: boolean;
+    out?: string;
 
-    [option: string]: boolean | undefined;
+    [option: string]: boolean | string | undefined;
 }

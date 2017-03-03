@@ -40,4 +40,16 @@ suite("parse command line test", () => {
         const result = parseCommandLine(cl);
         assert(result.options.help);
     });
+
+    test("out option", () => {
+        const cl = ["--out", "a.com"];
+        const result = parseCommandLine(cl);
+        assert.equal(result.options.out, "a.com");
+    });
+
+    test("short out option", () => {
+        const cl = ["-o", "a.com"];
+        const result = parseCommandLine(cl);
+        assert(result.options.out, "a.com");
+    });
 });

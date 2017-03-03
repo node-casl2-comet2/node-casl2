@@ -47,6 +47,11 @@ export function parseCommandLine(commandLine: Array<string>): ParsedCommandLine 
                     case "boolean":
                         options[commandLineOption.name] = true;
                         break;
+                    case "string":
+                        // 次の引数をそのオプションの値としている
+                        // e.g. -o a.com
+                        options[commandLineOption.name] = commandLine[i++] || "";
+                        break;
                 }
             } else {
                 errors.push("Unknwon option: " + s);
