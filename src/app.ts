@@ -36,6 +36,29 @@ function execute(args: Array<string>) {
         sys.stdout.newLine();
         printHelp();
     }
+
+    const compileOption: Casl2CompileOption = {
+        useGR8: options.useGR8
+    };
+
+    compile(fileNames[0], compileOption, options.out);
+}
+
+function compile(casSourcePath: string, compileOption: Casl2CompileOption, outputPath?: string) {
+    // .casファイルを読み込む
+    const buf = Reader.read(casSourcePath);
+    // 末尾の改行を取り除いて一行ずつに分ける
+    const lines = buf.toString().replace(/(\r\n|\r|\n)+$/, "").split(/\r\n|\r|\n/);
+    const compiler = new Casl2(compileOption);
+    const result = compiler.compile(lines);
+    if (result.success) {
+        // コンパイル成功の場合コンパイル結果をファイルに書き込む
+        const output = outputPath || casSourcePath.replace(/^.*[\\\/]/, "").replace(".cas", ".com");
+        Writer.binaryWrite(output, result.hexes);
+    } else {
+        // コンパイルエラーありの場合
+        result.errors.forEach(error => console.log(error.message));
+    }
 }
 
 function printHelp() {
@@ -89,25 +112,3 @@ function printVersion() {
 
 const args = process.argv.slice(2);
 execute(args);
-
-// // .casファイルを読み込む
-// const buf = Reader.read("./test/testdata/gr8.cas");
-
-// // 末尾の改行を取り除いて一行ずつに分ける
-// const lines = buf.toString().replace(/(\r\n|\r|\n)+$/, "").split(/\r\n|\r|\n/);
-
-// const compileOption: Casl2CompileOption = {
-//     useGR8: true
-// };
-
-// const casl2 = new Casl2(compileOption);
-
-// const result = casl2.compile(lines);
-
-// if (result.success) {
-//     // コンパイル成功の場合コンパイル結果をファイルに書き込む
-//     Writer.binaryWrite("temp.com", result.hexes);
-// } else {
-//     // コンパイルエラーありの場合
-//     result.errors.forEach(error => console.log(error.message));
-// }
