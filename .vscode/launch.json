@@ -9,10 +9,10 @@
             "request": "launch",
             "name": "Launch Program",
             "preLaunchTask": "compile", // デバッグ前にTypeScriptをコンパイルする
-            "program": "${workspaceRoot}/out/src/app.js",
+            "program": "${workspaceRoot}/dist/src/app.js",
             "cwd": "${workspaceRoot}",
             "outFiles": [
-                "${workspaceRoot}/out/**/*.js"
+                "${workspaceRoot}/dist/**/*.js"
             ],
             "sourceMaps": true
         },
