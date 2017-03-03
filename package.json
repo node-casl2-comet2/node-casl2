@@ -19,7 +19,7 @@
     "prepublish": "npm run compile"
   },
   "dependencies": {
-    "@maxfield/node-casl2-core": "^1.0.0",
+    "@maxfield/node-casl2-core": "^1.0.1",
     "lodash": "^4.17.4"
   },
   "devDependencies": {

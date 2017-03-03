@@ -47,7 +47,8 @@ function execute(args: Array<string>) {
     }
 
     const compileOption: Casl2CompileOption = {
-        useGR8: options.useGR8
+        useGR8: options.useGR8,
+        enableLabelScope: options.enableLabelScope
     };
 
     compile(casSourcePath, compileOption, options.out);
