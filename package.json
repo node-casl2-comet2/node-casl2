@@ -14,7 +14,8 @@
     "watch": "node ./node_modules/typescript/bin/tsc -w -p .",
     "run": "npm run compile && node ./dist/src/app.js",
     "test": "npm run compile && mocha",
-    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report none -- --ui tdd ./dist/test/**/*.js"
+    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report none -- --ui tdd ./dist/test/**/*.js",
+    "prepublish": "npm run compile"
   },
   "dependencies": {
     "@maxfield/node-casl2-core": "^1.0.0",
