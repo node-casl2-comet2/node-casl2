@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "",
   "main": "dist/src/app.js",
+  "bin": {
+    "node-casl2": "dist/src/app.js"
+  },
+  "preferGlobal": true,
   "author": "Maxfield Walker",
   "license": "MIT",
   "scripts": {

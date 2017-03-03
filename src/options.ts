@@ -22,9 +22,17 @@ export const commandLineOptions: Array<CommandLineOption> = [
 
 type OptionType = "boolean" | "string";
 
-interface CommandLineOption {
+export interface CommandLineOption {
     name: string;
     shortName?: string;
     type: OptionType;
     description: string;
+}
+
+export interface CommandLineOptions {
+    useGR8?: boolean;
+    enableLabelScope?: boolean;
+    version?: boolean;
+
+    [option: string]: boolean | undefined;
 }

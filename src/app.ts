@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 "use strict";
 
 import { Reader } from "./io/reader";
@@ -5,8 +7,31 @@ import { Writer } from "./io/writer";
 import { Casl2, Casl2CompileOption } from "@maxfield/node-casl2-core";
 import { commandLineOptions } from "./options";
 import { getVersion } from "./util/version";
-import { sys } from "./sys";
+import { sys, ExitStatus } from "./sys";
+import { parseCommandLine } from "./commandLine";
 import * as _ from "lodash";
+
+function execute(args: Array<string>) {
+    const parsed = parseCommandLine(args);
+    const { options, fileNames, errors } = parsed;
+    if (errors.length > 0) {
+        for (const err of errors) {
+            sys.stderr.writeLine(err);
+        }
+        return sys.exit(ExitStatus.Fail);
+    }
+
+    if (options.version) {
+        printVersion();
+        return sys.exit(ExitStatus.Success);
+    }
+
+    if (fileNames.length === 0) {
+        printAppInfo();
+        sys.stdout.newLine();
+        printHelp();
+    }
+}
 
 function printHelp() {
     const output: Array<string> = [];
@@ -49,12 +74,16 @@ function printHelp() {
     }
 }
 
+function printAppInfo() {
+    sys.stdout.writeLine(`node-casl2 v${getVersion()}`);
+}
+
 function printVersion() {
     sys.stdout.writeLine(getVersion());
 }
 
-printVersion();
-printHelp();
+const args = process.argv.slice(2);
+execute(args);
 
 // // .casファイルを読み込む
 // const buf = Reader.read("./test/testdata/gr8.cas");
