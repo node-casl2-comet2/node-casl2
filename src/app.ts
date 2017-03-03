@@ -37,6 +37,7 @@ function execute(args: Array<string>) {
         printAppInfo();
         sys.stdout.newLine();
         printHelp();
+        return sys.exit(ExitStatus.Success);
     }
 
     const casSourcePath = fileNames[0];
@@ -71,6 +72,14 @@ function compile(casSourcePath: string, compileOption: Casl2CompileOption, outpu
 
 function printHelp() {
     const output: Array<string> = [];
+
+    output.push("node-casl2 <input> [-o <output>] [options]");
+    output.push("");
+    output.push("例: node-casl2 src.cas");
+    output.push("    node-casl2 src.cas -o out.com");
+    output.push("    node-casl2 src.cas --useGR8");
+    output.push(sys.newLine);
+
     const optionColumn: Array<string> = [];
     const descriptionColumn: Array<string> = [];
     let marginLength = 0;
