@@ -11,7 +11,8 @@
 		"noImplicitThis": true,
 		"forceConsistentCasingInFileNames": true,
 		"removeComments": false,
-		"preserveConstEnums": true
+		"preserveConstEnums": true,
+		"newLine": "LF"
 	},
 	"exclude": [
 		"node_modules",
