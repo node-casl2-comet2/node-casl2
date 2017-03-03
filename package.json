@@ -10,6 +10,7 @@
   "author": "Maxfield Walker",
   "license": "MIT",
   "scripts": {
+    "start": "npm run compile && node .",
     "compile": "node ./node_modules/typescript/bin/tsc -p .",
     "watch": "node ./node_modules/typescript/bin/tsc -w -p .",
     "run": "npm run compile && node ./dist/src/app.js",
