@@ -1,7 +1,7 @@
 "use strict";
 
-const config = require("../../../package.json");
 
-export function getVersion(): string {
+export function getVersion() {
+    const config = require("../../../package.json");
     return config.version;
 }

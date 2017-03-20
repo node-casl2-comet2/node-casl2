@@ -19,6 +19,7 @@
     "prepublish": "npm run compile"
   },
   "dependencies": {
+    "@maxfield/node-casl2-comet2-common": "^0.0.5",
     "@maxfield/node-casl2-core": "^1.0.1",
     "lodash": "^4.17.4"
   },
@@ -28,6 +29,6 @@
     "@types/node": "^6.0.40",
     "istanbul": "^0.4.5",
     "mocha": "^2.3.3",
-    "typescript": "^2.0.3"
+    "typescript": "^2.2.1"
   }
 }

@@ -2,19 +2,14 @@
 
 "use strict";
 
-import { Reader } from "./io/reader";
 import { Writer } from "./io/writer";
 import { Casl2, Casl2CompileOption } from "@maxfield/node-casl2-core";
-import { commandLineOptions } from "./options";
-import { getVersion } from "./util/version";
-import { pathToFileName } from "./util/path";
-import { sys, ExitStatus } from "./sys";
-import { parseCommandLine } from "./commandLine";
-import { isValidInputSource } from "./validation";
+import { parseCommandLine, CLI, sys, ExitStatus, isValidInputSource } from "@maxfield/node-casl2-comet2-common";
+import { commandLineOptions, Casl2CommandLineOptions } from "./options";
 import * as _ from "lodash";
 
 function execute(args: Array<string>) {
-    const parsed = parseCommandLine(args);
+    const parsed = parseCommandLine<Casl2CommandLineOptions>(args, commandLineOptions);
     const { options, fileNames, errors } = parsed;
     if (errors.length > 0) {
         for (const err of errors) {
@@ -24,24 +19,24 @@ function execute(args: Array<string>) {
     }
 
     if (options.help) {
-        printHelp();
+        CLI.printHelp(commandLineOptions);
         return sys.exit(ExitStatus.Success);
     }
 
     if (options.version) {
-        printVersion();
+        CLI.printVersion(getVersion());
         return sys.exit(ExitStatus.Success);
     }
 
     if (fileNames.length === 0) {
-        printAppInfo();
+        CLI.printAppInfo("node-casl2", getVersion());
         sys.stdout.newLine();
-        printHelp();
+        CLI.printHelp(commandLineOptions);
         return sys.exit(ExitStatus.Success);
     }
 
     const casSourcePath = fileNames[0];
-    if (!isValidInputSource(casSourcePath)) {
+    if (!isValidInputSource(casSourcePath, ".cas")) {
         sys.stderr.writeLine("入力ソースの拡張子は '.cas' である必要があります。");
         return sys.exit(ExitStatus.Fail);
     }
@@ -54,78 +49,23 @@ function execute(args: Array<string>) {
     compile(casSourcePath, compileOption, options.out);
 }
 
-function compile(casSourcePath: string, compileOption: Casl2CompileOption, outputPath?: string) {
-    // .casファイルを読み込む
-    const buf = Reader.read(casSourcePath);
-    // 末尾の改行を取り除いて一行ずつに分ける
-    const lines = buf.toString().replace(/(\r\n|\r|\n)+$/, "").split(/\r\n|\r|\n/);
+function compile(casSourcePath: string, compileOption: Casl2CompileOption, outputPath?: string): void {
     const compiler = new Casl2(compileOption);
-    const result = compiler.compile(lines);
+    const result = compiler.compile(casSourcePath);
     if (result.success) {
+        if (result.hexes === undefined) throw new Error();
         // コンパイル成功の場合コンパイル結果をファイルに書き込む
         const output = outputPath || casSourcePath.replace(/^.*[\\\/]/, "").replace(".cas", ".com");
         Writer.binaryWrite(output, result.hexes);
     } else {
         // コンパイルエラーありの場合
-        result.errors.forEach(error => console.log(error.message));
+        result.diagnostics.forEach(d => console.log(d.messageText));
     }
 }
 
-function printHelp() {
-    const output: Array<string> = [];
-
-    output.push("node-casl2 <input> [-o <output>] [options]");
-    output.push("");
-    output.push("例: node-casl2 src.cas");
-    output.push("    node-casl2 src.cas -o out.com");
-    output.push("    node-casl2 src.cas --useGR8");
-    output.push(sys.newLine);
-
-    const optionColumn: Array<string> = [];
-    const descriptionColumn: Array<string> = [];
-    let marginLength = 0;
-
-    const sortedCommandLineOptions = commandLineOptions.sort((a, b) => {
-        const c = a.name.toLowerCase() > b.name.toLowerCase();
-        return c ? 1 : -1;
-    });
-
-    const makeSpace = (spaceLength: number) => Array(spaceLength + 1).join(" ");
-
-    for (const opt of sortedCommandLineOptions) {
-        let option = "";
-        if (opt.shortName) {
-            option += `-${opt.shortName}, `;
-        }
-        option += `--${opt.name}`
-
-        optionColumn.push(option);
-        descriptionColumn.push(opt.description);
-
-        marginLength = Math.max(option.length, marginLength);
-    }
-
-    if (optionColumn.length !== descriptionColumn.length) throw new Error();
-
-    const zip = _.zip(optionColumn, descriptionColumn);
-    for (const l of zip) {
-        const [option, description] = l;
-        // e.g. -v, --version [スペース] [説明]
-        const format = option + makeSpace(marginLength - option.length + 4) + description;
-        output.push(format);
-    }
-
-    for (const out of output) {
-        sys.stdout.writeLine(out);
-    }
-}
-
-function printAppInfo() {
-    sys.stdout.writeLine(`node-casl2 v${getVersion()}`);
-}
-
-function printVersion() {
-    sys.stdout.writeLine(getVersion());
+function getVersion() {
+    const config = require("../package.json");
+    return config.version;
 }
 
 const args = process.argv.slice(2);

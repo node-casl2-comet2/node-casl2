@@ -1,5 +1,6 @@
 "use strict";
 
+import { CommandLineOption, CommandLineOptions } from "@maxfield/node-casl2-comet2-common";
 
 export const commandLineOptions: Array<CommandLineOption> = [
     {
@@ -32,21 +33,10 @@ export const commandLineOptions: Array<CommandLineOption> = [
     }
 ];
 
-type OptionType = "boolean" | "string";
-
-export interface CommandLineOption {
-    name: string;
-    shortName?: string;
-    type: OptionType;
-    description: string;
-}
-
-export interface CommandLineOptions {
+export interface Casl2CommandLineOptions extends CommandLineOptions {
     useGR8?: boolean;
     enableLabelScope?: boolean;
     version?: boolean;
     help?: boolean;
     out?: string;
-
-    [option: string]: boolean | string | undefined;
 }
