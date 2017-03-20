@@ -7,6 +7,7 @@ import { Casl2, Casl2CompileOption } from "@maxfield/node-casl2-core";
 import { parseCommandLine, CLI, sys, ExitStatus, isValidInputSource } from "@maxfield/node-casl2-comet2-common";
 import { commandLineOptions, Casl2CommandLineOptions } from "./options";
 import * as _ from "lodash";
+import { printDiagnostic } from "./ui/print";
 
 function execute(args: Array<string>) {
     const parsed = parseCommandLine<Casl2CommandLineOptions>(args, commandLineOptions);
@@ -59,7 +60,7 @@ function compile(casSourcePath: string, compileOption: Casl2CompileOption, outpu
         Writer.binaryWrite(output, result.hexes);
     } else {
         // コンパイルエラーありの場合
-        result.diagnostics.forEach(d => console.log(d.messageText));
+        result.diagnostics.forEach(d => sys.stderr.writeLine(printDiagnostic(d)));
     }
 }
 
