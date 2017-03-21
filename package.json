@@ -1,6 +1,6 @@
 {
   "name": "@maxfield/node-casl2",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "",
   "main": "dist/src/app.js",
   "bin": {
@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@maxfield/node-casl2-comet2-common": "^0.0.5",
-    "@maxfield/node-casl2-core": "^1.0.1",
+    "@maxfield/node-casl2-core": "^1.1.1",
     "colors": "^1.1.2",
     "lodash": "^4.17.4"
   },
