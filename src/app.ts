@@ -8,6 +8,7 @@ import { parseCommandLine, CLI, sys, ExitStatus, isValidInputSource } from "@max
 import { commandLineOptions, Casl2CommandLineOptions } from "./options";
 import * as _ from "lodash";
 import { printDiagnostic } from "./ui/print";
+import { getVersion } from "./util/version";
 
 function execute(args: Array<string>) {
     const parsed = parseCommandLine<Casl2CommandLineOptions>(args, commandLineOptions);
@@ -62,11 +63,6 @@ function compile(casSourcePath: string, compileOption: Casl2CompileOption, outpu
         // コンパイルエラーありの場合
         result.diagnostics.forEach(d => sys.stderr.writeLine(printDiagnostic(d)));
     }
-}
-
-function getVersion() {
-    const config = require("../package.json");
-    return config.version;
 }
 
 const args = process.argv.slice(2);
