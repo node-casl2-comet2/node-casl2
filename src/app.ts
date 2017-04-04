@@ -6,7 +6,6 @@ import { Writer } from "./io/writer";
 import { Casl2, Casl2CompileOption } from "@maxfield/node-casl2-core";
 import { parseCommandLine, CLI, sys, ExitStatus, isValidInputSource } from "@maxfield/node-casl2-comet2-common";
 import { commandLineOptions, Casl2CommandLineOptions } from "./options";
-import * as _ from "lodash";
 import { printDiagnostic } from "./ui/print";
 import { getVersion } from "./util/version";
 
