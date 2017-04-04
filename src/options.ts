@@ -14,6 +14,11 @@ export const commandLineOptions: Array<CommandLineOption> = [
         description: "ラベルのスコープを有効にします。"
     },
     {
+        name: "allowNegativeValueForEffectiveAddress",
+        type: "boolean",
+        description: "実効アドレスに負値をとることを許可します。"
+    },
+    {
         name: "version",
         shortName: "v",
         type: "boolean",
@@ -36,6 +41,7 @@ export const commandLineOptions: Array<CommandLineOption> = [
 export interface Casl2CommandLineOptions extends CommandLineOptions {
     useGR8?: boolean;
     enableLabelScope?: boolean;
+    allowNegativeValueForEffectiveAddress?: boolean;
     version?: boolean;
     help?: boolean;
     out?: string;
