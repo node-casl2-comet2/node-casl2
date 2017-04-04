@@ -21,6 +21,12 @@ suite("parse command line test", () => {
         assert(result.options.enableLabelScope);
     });
 
+    test("allowNegativeValueForEffectiveAddress option", () => {
+        const cl = ["--allowNegativeValueForEffectiveAddress"];
+        const result = parse(cl);
+        assert(result.options.allowNegativeValueForEffectiveAddress);
+    });
+
     test("version option", () => {
         const cl = ["--version"];
         const result = parse(cl);
