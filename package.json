@@ -1,7 +1,7 @@
 {
   "name": "@maxfield/node-casl2",
   "version": "0.1.0",
-  "description": "",
+  "description": "CASL2 CLI",
   "main": "dist/src/app.js",
   "bin": {
     "node-casl2": "dist/src/app.js"
