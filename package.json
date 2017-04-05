@@ -1,6 +1,6 @@
 {
   "name": "@maxfield/node-casl2",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "CASL2 CLI",
   "main": "dist/src/app.js",
   "bin": {
@@ -18,8 +18,8 @@
     "prepublish": "npm run compile"
   },
   "dependencies": {
-    "@maxfield/node-casl2-comet2-common": "^0.0.5",
-    "@maxfield/node-casl2-core": "^1.1.1",
+    "@maxfield/node-casl2-comet2-common": "^1.0.0",
+    "@maxfield/node-casl2-core": "^1.2.0",
     "colors": "^1.1.2"
   },
   "devDependencies": {
