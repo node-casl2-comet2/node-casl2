@@ -5,6 +5,8 @@
 
 node-casl2はCASL2のCLIツールです。
 
+[![node-casl2 demo](https://asciinema.org/a/111020.png)](https://asciinema.org/a/111020)
+
 ## Install
 1. [Node.js](https://nodejs.org/ja/)をインストール
 1. `$ npm install -g @maxfield/node-casl2`
