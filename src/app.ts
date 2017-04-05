@@ -9,7 +9,7 @@ import { commandLineOptions, Casl2CommandLineOptions } from "./options";
 import { printDiagnostic } from "./ui/print";
 import { getVersion } from "./util/version";
 
-function execute(args: Array<string>) {
+function execute(args: string[]) {
     const parsed = parseCommandLine<Casl2CommandLineOptions>(args, commandLineOptions);
     const { options, fileNames, errors } = parsed;
     if (errors.length > 0) {

@@ -3,13 +3,13 @@
 import * as fs from "fs";
 
 export class Writer {
-    public static binaryWrite(path: string, numbers: Array<number>) {
+    public static binaryWrite(path: string, numbers: number[]) {
         const buffer = Writer.createBinaryBuffer(numbers);
 
         fs.writeFileSync(path, buffer);
     }
 
-    public static createBinaryBuffer(numbers: Array<number>): Buffer {
+    public static createBinaryBuffer(numbers: number[]): Buffer {
         const byteLength = numbers
             .map(n => {
                 const digit = n.toString(16).length;

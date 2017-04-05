@@ -4,7 +4,7 @@ import * as assert from "assert";
 import { commandLineOptions, Casl2CommandLineOptions } from "../src/options";
 import { parseCommandLine, ParsedCommandLine } from "@maxfield/node-casl2-comet2-common";
 
-function parse(cl: Array<string>) {
+function parse(cl: string[]) {
     return parseCommandLine<Casl2CommandLineOptions>(cl, commandLineOptions);
 }
 

@@ -2,7 +2,7 @@
 
 import { CommandLineOption, CommandLineOptions } from "@maxfield/node-casl2-comet2-common";
 
-export const commandLineOptions: Array<CommandLineOption> = [
+export const commandLineOptions: CommandLineOption[] = [
     {
         name: "useGR8",
         type: "boolean",
